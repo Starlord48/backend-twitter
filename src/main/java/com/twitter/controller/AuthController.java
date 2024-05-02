@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import com.twitter.service.CustomUserDetailsServiceImplementation;
 
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = {"https://twitter-delta-nine.vercel.app", "http://localhost:3000"})
 public class AuthController {
 	
 	@Autowired
