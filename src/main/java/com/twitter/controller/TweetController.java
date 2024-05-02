@@ -30,7 +30,7 @@ import com.twitter.service.UserService;
 
 @RestController
 @RequestMapping("api/tweets")
-@CrossOrigin(origins = {"https://twitter-delta-nine.vercel.app", "https://twitter-api-rb.vercel.app", "http://localhost:3000"})
+@CrossOrigin(origins = "*")
 public class TweetController {
 	
 	@Autowired

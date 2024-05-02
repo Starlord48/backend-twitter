@@ -26,7 +26,7 @@ import com.twitter.service.CustomUserDetailsServiceImplementation;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = {"https://twitter-delta-nine.vercel.app", "https://twitter-api-rb.vercel.app", "http://localhost:3000"})
+@CrossOrigin(origins = "*")
 public class AuthController {
 	
 	@Autowired
