@@ -98,7 +98,7 @@ public class TweetServiceImplementation implements TweetService{
 		
 		Tweet savedReply = tweetRepository.save(tweet);
 		
-		tweet.getReplyTweets().add(savedReply);
+		replyFor.getReplyTweets().add(savedReply);
 		tweetRepository.save(replyFor);
 		 return replyFor;
 	}

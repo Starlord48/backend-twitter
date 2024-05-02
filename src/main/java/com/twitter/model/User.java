@@ -36,6 +36,30 @@ public class User {
 	private String password;
 	private String mobile;
 	private String image;
+	private String backgroundImage;
+	
+	private String bio;
+	private String req_user;
+	private boolean login_with_google;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Tweet> Tweets = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Like> likes = new ArrayList<>();
+	
+	@Embedded
+	private Verification verification;
+	
+	@JsonIgnore
+	@ManyToMany
+	private List<User> followers = new ArrayList<>();
+	
+	@JsonIgnore
+	@ManyToMany
+	private List<User> followings = new ArrayList<>();
+
 	public User() {
 		super();
 	}
@@ -64,8 +88,8 @@ public class User {
 		this.followers = followers;
 		this.followings = followings;
 	}
+	
 
-	private String backgroundImage;
 	public Long getId() {
 		return id;
 	}
@@ -210,27 +234,6 @@ public class User {
 		this.followings = followings;
 	}
 
-	private String bio;
-	private String req_user;
-	private boolean login_with_google;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
-	private List<Tweet> Tweets = new ArrayList<>();
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private List<Like> likes = new ArrayList<>();
-	
-	@Embedded
-	private Verification verification;
-	
-	@JsonIgnore
-	@ManyToMany
-	private List<User> followers = new ArrayList<>();
-	
-	@JsonIgnore
-	@ManyToMany
-	private List<User> followings = new ArrayList<>();
 
 
 	

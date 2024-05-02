@@ -55,7 +55,7 @@ public class TweetController {
 	public ResponseEntity<TweetDto> replyTweet(@RequestBody TweetReplyRequest req, 
 			@RequestHeader("Authorization") String jwt ) throws UserException, TweetException {
 		
-		User user = userService.findUserProfileByJwt(jwt);		
+		User user = userService.findUserProfileByJwt(jwt);
 		Tweet tweet = tweetService.createReply(req, user);		
 		TweetDto tweetDto = TweetDtoMapper.toTweetDto(tweet, user);
 		

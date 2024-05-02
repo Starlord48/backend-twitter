@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +36,11 @@ public class AuthController {
 	@Autowired
 	private CustomUserDetailsServiceImplementation customUserDetails;
 	
+	@GetMapping("/welcome")
+	public String welcome() {
+		return "The API is working well";
+	}
+	
 	@PostMapping("/signup")
 	public ResponseEntity<AuthResponce> createUserHandeler(@RequestBody User user) throws UserException{
 
@@ -56,12 +62,15 @@ public class AuthController {
 		createdUser.setBirthDate(birthDate);
 		createdUser.setVerification(new Verification());
 		
-		User savedUser = userRepository.save(createdUser);
+		userRepository.save(createdUser);
+		
 		Authentication authentication = new UsernamePasswordAuthenticationToken(email, createdUser.getPassword());
-		System.out.println(isEmailExist != null);
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
+		
 		String token = jwtProvider.generateToken(authentication);
+		
 		AuthResponce res = new AuthResponce(token, true);
 		
 		return new ResponseEntity<AuthResponce>(res, HttpStatus.CREATED);
@@ -75,6 +84,7 @@ public class AuthController {
 		Authentication authentication = authenticate(username, password);
 		String token = jwtProvider.generateToken(authentication);
 		AuthResponce res = new AuthResponce(token, true);
+		
 		
 		return new ResponseEntity<AuthResponce>(res, HttpStatus.ACCEPTED);
 	}
